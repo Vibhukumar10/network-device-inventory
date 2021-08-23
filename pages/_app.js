@@ -10,9 +10,12 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     if (user) {
-      db.collection("users").doc(user.uid).set({});
+      db.collection("users").doc(user.uid).set({
+        email: user.email,
+        photoURL: user.photoURL,
+      });
     }
-  });
+  }, [user]);
 
   if (loading) {
     return <Loading />;
