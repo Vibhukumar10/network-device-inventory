@@ -1,39 +1,76 @@
-import { Avatar, IconButton } from "@material-ui/core";
+import { Grid, TextField } from "@material-ui/core";
 import styled from "styled-components";
-
-import ChatIcon from "@material-ui/icons/Chat";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import SearchIcon from "@material-ui/icons/Search";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useCollection } from "react-firebase-hooks/firestore";
 import CreateModal from "./CreateModal";
+import Inventories from "./Inventories";
+import Topbar from "./Topbar";
+import { useState } from "react";
 
 function Dashboard() {
   const [user] = useAuthState(auth);
+  const [input, setInput] = useState("");
+  const [message, setMessage] = useState("");
 
+  const inventoryRef = db
+    .collection("inventories")
+    .orderBy("timeStamp", "desc");
+  const [inventorySnapshot] = useCollection(inventoryRef);
+  let renderInventory = inventorySnapshot?.docs.filter(
+    (inventory) => inventory.data().userId == user.uid
+  );
+
+  if (input.length > 0) {
+    renderInventory = renderInventory.filter((i) =>
+      i.data().inventory.name.toLowerCase().includes(input.toLowerCase())
+    );
+  }
   return (
     <>
       {/*  */}
       <Container>
-        <Header>
-          <UserAvatar src={user?.photoURL} onClick={() => auth.signOut()} />
-          {/* Icons */}
-          <IconsContainer>
-            <IconButton>
-              <ChatIcon />
-            </IconButton>
-            <IconButton>
-              <MoreVertIcon />
-            </IconButton>
-          </IconsContainer>
-          {/*  */}
-        </Header>
-        <Search>
-          <SearchIcon />
-          <SearchInput placeholder="Seach Inventories" />
-        </Search>
+        <Topbar />
+        <SearchContainer>
+          <Search>
+            {/* <SearchIcon /> */}
+            <TextField
+              label="Search"
+              type="search"
+              variant="outlined"
+              placeholder="Search Inventories"
+              value={input}
+              onChange={(e) => {
+                setInput(e.target.value);
+              }}
+              fullWidth
+            />
+          </Search>
+        </SearchContainer>
+        {/* <Searchbar /> */}
         <CreateModal />
         {/* Inventories */}
+        <GridContainer>
+          <Grid direction="row" alignItems="center" container>
+            {renderInventory?.map((inventory) => (
+              <Inventories
+                key={inventory.id}
+                id={inventory.id}
+                data={inventory.data()}
+              />
+            ))}
+          </Grid>
+        </GridContainer>
+        {renderInventory?.length === 0 && (
+          <MessageContainer>
+            <WelcomeMessage>
+              <em>
+                &quot;Welcome to Network Inventory, Press the above button to
+                create a new Inventory&quot;
+              </em>
+            </WelcomeMessage>
+          </MessageContainer>
+        )}
       </Container>
     </>
   );
@@ -41,42 +78,43 @@ function Dashboard() {
 
 export default Dashboard;
 
-const UserAvatar = styled(Avatar)`
-  cursor: pointer;
+const GridContainer = styled.div`
+  padding: 0 4rem;
+
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+  }
 `;
 
 const Container = styled.div`
   background-color: whitesmoke;
-  height: 100vh;
+  min-height: 100vh;
   border-right: 1px solid lightgray;
 `;
 
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  background-color: white;
-  z-index: 1;
-  padding: 15px;
-  height: 80px;
-  border-bottom: 1px solid lightgray;
-`;
-
-const IconsContainer = styled.div``;
-
 const Search = styled.div`
+  min-width: 35vw;
   display: flex;
   align-items: center;
   padding: 20px;
   border-radius: 2px;
 `;
 
-const SearchInput = styled.input`
-  border: none;
-  flex: 1;
-  :focus {
-    outline: none;
-  }
+const SearchContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const MessageContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+`;
+
+const WelcomeMessage = styled.div`
+  padding: 2rem;
+  text-align: center;
+  color: #b2b1b9;
 `;

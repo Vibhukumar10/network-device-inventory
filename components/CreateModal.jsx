@@ -50,6 +50,7 @@ function CreateModal() {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
+      margin: theme.spacing(1, 0),
     },
     paper: {
       backgroundColor: theme.palette.background.paper,
@@ -59,23 +60,44 @@ function CreateModal() {
       padding: theme.spacing(2, 2),
     },
     formControl: {
-      margin: theme.spacing(0),
+      margin: theme.spacing(1, 1, 0),
     },
   }));
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // if (user) {
-    //   db.collection("users")
-    //     .doc(user.uid)
-    //     .update({
-    //       inventories: firebase.firestore.FieldValue.arrayUnion(inventory),
-    //     });
-    // }
+    db.collection("inventories").add({
+      inventory: inventory,
+      userId: user.uid,
+      timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+
+    setInventory({
+      name: "",
+      model: "",
+      os: "",
+      location: "",
+      install: "",
+      eol: "",
+      owner: "",
+    });
 
     setOpen(false);
-    console.log(inventory);
+    // console.log(inventory);
+  };
+
+  const handleClose = () => {
+    setInventory({
+      name: "",
+      model: "",
+      os: "",
+      location: "",
+      install: "",
+      eol: "",
+      owner: "",
+    });
+    setOpen(false);
   };
 
   const classes = useStyles();
@@ -87,9 +109,7 @@ function CreateModal() {
         aria-describedby="transition-modal-description"
         className={classes.modal}
         open={open}
-        onClose={() => {
-          setOpen(false);
-        }}
+        onClose={handleClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
       >
@@ -100,12 +120,12 @@ function CreateModal() {
             </h2> */}
             <CardContent>
               <FormContainer onSubmit={handleSubmit}>
-                <Grid
-                  container
-                  spacing={1}
-                  style={{ justifyContent: "center" }}
-                >
-                  <Grid xs={12} spacing={1} item>
+                <Grid container style={{ justifyContent: "center" }}>
+                  <Grid
+                    className={(classes.grid, classes.formControl)}
+                    xs={12}
+                    item
+                  >
                     <TextField
                       label="Name"
                       variant="outlined"
@@ -118,7 +138,7 @@ function CreateModal() {
                       required
                     />
                   </Grid>
-                  <Grid lg={6} sm={6} xs={12} item>
+                  <Grid className={classes.grid} lg={6} sm={6} xs={12} item>
                     <FormControl
                       variant="outlined"
                       className={classes.formControl}
@@ -148,7 +168,7 @@ function CreateModal() {
                       </Select>
                     </FormControl>
                   </Grid>
-                  <Grid lg={6} sm={6} xs={12} item>
+                  <Grid className={classes.grid} lg={6} sm={6} xs={12} item>
                     <FormControl
                       variant="outlined"
                       className={classes.formControl}
@@ -177,7 +197,11 @@ function CreateModal() {
                       </Select>
                     </FormControl>
                   </Grid>
-                  <Grid xs={12} item>
+                  <Grid
+                    className={(classes.grid, classes.formControl)}
+                    xs={12}
+                    item
+                  >
                     <TextField
                       label="Physical Location"
                       variant="outlined"
@@ -192,7 +216,7 @@ function CreateModal() {
                       fullWidth
                     />
                   </Grid>
-                  <Grid lg={6} sm={6} xs={12} item>
+                  <Grid className={classes.grid} lg={6} sm={6} xs={12} item>
                     <FormControl className={classes.formControl} fullWidth>
                       <TextField
                         type="date"
@@ -213,7 +237,7 @@ function CreateModal() {
                       />
                     </FormControl>
                   </Grid>
-                  <Grid lg={6} sm={6} xs={12} item>
+                  <Grid className={classes.grid} lg={6} sm={6} xs={12} item>
                     <FormControl className={classes.formControl} fullWidth>
                       <TextField
                         type="date"
@@ -234,7 +258,11 @@ function CreateModal() {
                       />
                     </FormControl>
                   </Grid>
-                  <Grid xs={12} item>
+                  <Grid
+                    className={(classes.grid, classes.formControl)}
+                    xs={12}
+                    item
+                  >
                     <TextField
                       label="Owner"
                       variant="outlined"
@@ -250,7 +278,13 @@ function CreateModal() {
                       required
                     />
                   </Grid>
-                  <Grid xs={12} lg={12} className={classes.grid} item>
+                  <Grid
+                    xs={12}
+                    lg={12}
+                    className={(classes.grid, classes.formControl)}
+                    style={{ marginTop: "15px" }}
+                    item
+                  >
                     <Button
                       variant="contained"
                       color="primary"
@@ -267,14 +301,10 @@ function CreateModal() {
         </Fade>
       </Modal>
       <ButtonContainer>
-        <SidebarButton
-          variant="contained"
-          color="primary"
-          onClick={handleModal}
-        >
+        <CreateButton variant="contained" color="primary" onClick={handleModal}>
           <AddIcon />
           Create a new Inventory
-        </SidebarButton>
+        </CreateButton>
       </ButtonContainer>
     </>
   );
@@ -283,10 +313,12 @@ function CreateModal() {
 export default CreateModal;
 
 const ButtonContainer = styled.div`
+  min-width: 35vw;
   display: flex;
   justify-content: center;
+  margin-bottom: 2rem;
 `;
 
-const SidebarButton = styled(Button)``;
+const CreateButton = styled(Button)``;
 
 const FormContainer = styled.form``;
