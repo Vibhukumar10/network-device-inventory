@@ -13,10 +13,14 @@ import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/core/styles";
 import OpenInNewIcon from "@material-ui/icons/OpenInNew";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+import styled from "styled-components";
 
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
+  },
+  Card: {
+    textAlign: "center",
   },
   overlay: {
     width: "100%",
@@ -71,8 +75,8 @@ export default function Inventories({ id, data }) {
   };
 
   return (
-    <Grid lg={3} sm={6} xs={12} style={{ padding: "1rem" }} item>
-      <Card className={classes.root}>
+    <StyledGrid lg={3} md={4} sm={6} xs={12} style={{ padding: "1rem" }} item>
+      <StyledCard>
         <CardActionArea onClick={enterInventory}>
           <CardMedia
             component="img"
@@ -123,15 +127,32 @@ export default function Inventories({ id, data }) {
             </Typography>
           </CardContent>
         </CardActionArea>
-        <CardActions>
-          <IconButton color="primary">
+        <CardActions style={{ justifyContent: "flex-end" }}>
+          <IconButton
+            color="primary"
+            onClick={() => {
+              router.push(`/inventory/${id}`);
+            }}
+          >
             <OpenInNewIcon />
           </IconButton>
           <IconButton onClick={handleDelete} color="primary">
             <DeleteOutlineIcon />
           </IconButton>
         </CardActions>
-      </Card>
-    </Grid>
+      </StyledCard>
+    </StyledGrid>
   );
 }
+const StyledGrid = styled(Grid)`
+  @media (max-width: 1280px) {
+    text-align: center;
+  }
+`;
+
+const StyledCard = styled(Card)`
+  max-width: 345px;
+  @media (max-width: 1280px) {
+    margin: 0 auto;
+  }
+`;

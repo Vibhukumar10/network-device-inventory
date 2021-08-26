@@ -84,7 +84,6 @@ function CreateModal() {
     });
 
     setOpen(false);
-    // console.log(inventory);
   };
 
   const handleClose = () => {
@@ -115,9 +114,6 @@ function CreateModal() {
       >
         <Fade in={open}>
           <Card className={classes.paper}>
-            {/* <h2 style={{ textAlign: "center" }} id="transition-modal-title">
-              Create a new Inventory
-            </h2> */}
             <CardContent>
               <FormContainer onSubmit={handleSubmit}>
                 <Grid container style={{ justifyContent: "center" }}>
@@ -313,10 +309,9 @@ function CreateModal() {
 export default CreateModal;
 
 const ButtonContainer = styled.div`
-  min-width: 35vw;
   display: flex;
   justify-content: center;
-  margin-bottom: 2rem;
+  margin: 0 auto 2rem;
 `;
 
 const CreateButton = styled(Button)``;

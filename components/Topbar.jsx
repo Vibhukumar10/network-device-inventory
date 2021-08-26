@@ -76,7 +76,3 @@ const Header = styled.div`
   height: 65px;
   border-bottom: 1px solid lightgray;
 `;
-
-const LogoImg = styled.svg`
-  width: 35px;
-`;

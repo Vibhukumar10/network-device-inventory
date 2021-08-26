@@ -1,4 +1,4 @@
-import { Grid, TextField } from "@material-ui/core";
+import { Card, Grid, TextField } from "@material-ui/core";
 import styled from "styled-components";
 import { auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -33,26 +33,29 @@ function Dashboard() {
       <Container>
         <Topbar />
         <SearchContainer>
-          <Search>
-            {/* <SearchIcon /> */}
-            <TextField
-              label="Search"
-              type="search"
-              variant="outlined"
-              placeholder="Search Inventories"
-              value={input}
-              onChange={(e) => {
-                setInput(e.target.value);
-              }}
-              fullWidth
-            />
-          </Search>
+          <Card>
+            <Search>
+              {/* <SearchIcon /> */}
+              <TextField
+                label="Search"
+                type="search"
+                variant="outlined"
+                size="small"
+                placeholder="Search Inventories"
+                value={input}
+                onChange={(e) => {
+                  setInput(e.target.value);
+                }}
+                fullWidth
+              />
+            </Search>
+          </Card>
         </SearchContainer>
         {/* <Searchbar /> */}
         <CreateModal />
         {/* Inventories */}
         <GridContainer>
-          <Grid direction="row" alignItems="center" container>
+          <StyledGrid direction="row" alignItems="center" container>
             {renderInventory?.map((inventory) => (
               <Inventories
                 key={inventory.id}
@@ -60,7 +63,7 @@ function Dashboard() {
                 data={inventory.data()}
               />
             ))}
-          </Grid>
+          </StyledGrid>
         </GridContainer>
         {renderInventory?.length === 0 && (
           <MessageContainer>
@@ -86,6 +89,12 @@ function Dashboard() {
 
 export default Dashboard;
 
+const StyledGrid = styled(Grid)`
+  @media (max-width: 600px) {
+    justify-content: center;
+  }
+`;
+
 const GridContainer = styled.div`
   padding: 0 4rem;
 
@@ -104,7 +113,7 @@ const Search = styled.div`
   min-width: 35vw;
   display: flex;
   align-items: center;
-  padding: 20px;
+  padding: 0.75rem;
   border-radius: 2px;
 `;
 
@@ -112,6 +121,7 @@ const SearchContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 1rem 0;
 `;
 
 const MessageContainer = styled.div`
