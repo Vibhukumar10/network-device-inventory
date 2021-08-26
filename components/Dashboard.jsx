@@ -11,7 +11,6 @@ import { useState } from "react";
 function Dashboard() {
   const [user] = useAuthState(auth);
   const [input, setInput] = useState("");
-  const [message, setMessage] = useState("");
 
   const inventoryRef = db
     .collection("inventories")
@@ -20,6 +19,8 @@ function Dashboard() {
   let renderInventory = inventorySnapshot?.docs.filter(
     (inventory) => inventory.data().userId == user.uid
   );
+
+  const renderInventoryCopy = renderInventory;
 
   if (input.length > 0) {
     renderInventory = renderInventory.filter((i) =>
@@ -64,10 +65,17 @@ function Dashboard() {
         {renderInventory?.length === 0 && (
           <MessageContainer>
             <WelcomeMessage>
-              <em>
-                &quot;Welcome to Network Inventory, Press the above button to
-                create a new Inventory&quot;
-              </em>
+              {renderInventoryCopy?.length === 0 ? (
+                <em>
+                  &quot;Welcome to Network Inventory, Press the above button to
+                  create a new Inventory&quot;
+                </em>
+              ) : (
+                <em>
+                  &quot;There is no such inventory, try updating your
+                  search&quot;
+                </em>
+              )}
             </WelcomeMessage>
           </MessageContainer>
         )}
