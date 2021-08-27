@@ -14,10 +14,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import OpenInNewIcon from "@material-ui/icons/OpenInNew";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import styled from "styled-components";
+import LastUpdated from "./LastUpdated";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    maxWidth: 300,
   },
   Card: {
     textAlign: "center",
@@ -60,6 +61,7 @@ const Switch = {
 export default function Inventories({ id, data }) {
   const classes = useStyles();
   const router = useRouter();
+  const timestamp = data?.timeStamp?.toDate();
 
   const num = data.inventory.model;
 
@@ -127,18 +129,24 @@ export default function Inventories({ id, data }) {
             </Typography>
           </CardContent>
         </CardActionArea>
-        <CardActions style={{ justifyContent: "flex-end" }}>
-          <IconButton
-            color="primary"
-            onClick={() => {
-              router.push(`/inventory/${id}`);
-            }}
-          >
-            <OpenInNewIcon />
-          </IconButton>
-          <IconButton onClick={handleDelete} color="primary">
-            <DeleteOutlineIcon />
-          </IconButton>
+        <CardActions
+          style={{ justifyContent: "space-between", alignItems: "center " }}
+        >
+          <LastUpdated date={timestamp} />
+          <IconContainer>
+            <IconButton
+              color="primary"
+              onClick={() => {
+                router.push(`/inventory/${id}`);
+              }}
+              style={{ padding: "6px" }}
+            >
+              <OpenInNewIcon />
+            </IconButton>
+            <IconButton onClick={handleDelete} color="primary">
+              <DeleteOutlineIcon />
+            </IconButton>
+          </IconContainer>
         </CardActions>
       </StyledCard>
     </StyledGrid>
@@ -150,9 +158,13 @@ const StyledGrid = styled(Grid)`
   }
 `;
 
+const IconContainer = styled.div``;
+
 const StyledCard = styled(Card)`
   max-width: 345px;
   @media (max-width: 1280px) {
     margin: 0 auto;
   }
 `;
+
+const CardUpdated = styled.div``;

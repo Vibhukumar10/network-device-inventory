@@ -7,6 +7,12 @@ import Loading from "../components/Loading";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en";
+import Topbar from "../components/Topbar";
+import Footer from "../components/Footer";
+TimeAgo.addDefaultLocale(en);
+
 function MyApp({ Component, pageProps }) {
   const [user, loading] = useAuthState(auth);
   const [progress, setProgress] = useState(false);
@@ -49,7 +55,9 @@ function MyApp({ Component, pageProps }) {
   } else
     return (
       <>
+        {/* <Topbar /> */}
         <Component {...pageProps} />
+        <Footer />
       </>
     );
 }

@@ -45,7 +45,7 @@ export default function Inventory() {
 
 const GridContainer = styled.div`
   padding: 5rem;
-  min-height: calc(100vh - 65px);
+  min-height: calc(100vh - 65px - 40px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,6 +60,6 @@ const GridContainer = styled.div`
 
 const Container = styled.div`
   background-color: whitesmoke;
-  min-height: 100vh;
+  min-height: calc(100vh - 40px);
   border-right: 1px solid lightgray;
 `;

@@ -105,7 +105,7 @@ const GridContainer = styled.div`
 
 const Container = styled.div`
   background-color: whitesmoke;
-  min-height: 100vh;
+  min-height: calc(100vh - 40px);
   border-right: 1px solid lightgray;
 `;
 
