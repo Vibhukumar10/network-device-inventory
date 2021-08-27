@@ -71,7 +71,7 @@ const Header = styled.div`
   position: sticky;
   top: 0;
   background-color: white;
-  z-index: 1;
+  z-index: 50;
   padding: 15px;
   height: 65px;
   border-bottom: 1px solid lightgray;

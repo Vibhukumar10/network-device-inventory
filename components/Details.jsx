@@ -1,5 +1,4 @@
 import {
-  Button,
   Card,
   FormControl,
   FormLabel,
@@ -11,6 +10,7 @@ import {
   TextField,
 } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
+import CheckCircleRoundedIcon from "@material-ui/icons/CheckCircleRounded";
 import { useState } from "react";
 import styled from "styled-components";
 import { db } from "../firebase";
@@ -152,7 +152,7 @@ export default function Details({ id, data }) {
               </StyledFormLabel>
               <TextField
                 id="outlined-read-only-input"
-                label=""
+                label="Name"
                 value={name}
                 variant="outlined"
                 disabled={!editName}
@@ -173,13 +173,9 @@ export default function Details({ id, data }) {
                   </IconButton>
                 ) : (
                   <ButtonContainer>
-                    <CreateButton
-                      variant="contained"
-                      color="primary"
-                      type="submit"
-                    >
-                      Update
-                    </CreateButton>
+                    <IconButton type="submit">
+                      <CheckCircleRoundedIcon />
+                    </IconButton>
                   </ButtonContainer>
                 )}
               </DetailAction>
@@ -195,13 +191,7 @@ export default function Details({ id, data }) {
               <StyledFormLabel>
                 <em>Model</em>
               </StyledFormLabel>
-              <FormControl
-                variant="outlined"
-                // className={classes.formControl}
-                // required
-                size="small"
-                fullWidth
-              >
+              <FormControl variant="outlined" size="small" fullWidth>
                 <InputLabel id="demo-simple-select-outlined-label">
                   Switch Model
                 </InputLabel>
@@ -236,13 +226,9 @@ export default function Details({ id, data }) {
                   </IconButton>
                 ) : (
                   <ButtonContainer>
-                    <CreateButton
-                      variant="contained"
-                      color="primary"
-                      type="submit"
-                    >
-                      Update
-                    </CreateButton>
+                    <IconButton type="submit">
+                      <CheckCircleRoundedIcon />
+                    </IconButton>
                   </ButtonContainer>
                 )}
               </DetailAction>
@@ -298,13 +284,9 @@ export default function Details({ id, data }) {
                   </IconButton>
                 ) : (
                   <ButtonContainer>
-                    <CreateButton
-                      variant="contained"
-                      color="primary"
-                      type="submit"
-                    >
-                      Update
-                    </CreateButton>
+                    <IconButton type="submit">
+                      <CheckCircleRoundedIcon />
+                    </IconButton>
                   </ButtonContainer>
                 )}
               </DetailAction>
@@ -322,7 +304,7 @@ export default function Details({ id, data }) {
               </StyledFormLabel>
               <TextField
                 id="outlined-read-only-input"
-                label=""
+                label="Location"
                 value={location}
                 variant="outlined"
                 disabled={!editLocation}
@@ -343,13 +325,9 @@ export default function Details({ id, data }) {
                   </IconButton>
                 ) : (
                   <ButtonContainer>
-                    <CreateButton
-                      variant="contained"
-                      color="primary"
-                      type="submit"
-                    >
-                      Update
-                    </CreateButton>
+                    <IconButton type="submit">
+                      <CheckCircleRoundedIcon />
+                    </IconButton>
                   </ButtonContainer>
                 )}
               </DetailAction>
@@ -363,12 +341,12 @@ export default function Details({ id, data }) {
           <Form onSubmit={handleInstallUpdate}>
             <DetailGroup>
               <StyledFormLabel>
-                <em>Install</em>
+                <em>Installation</em>
               </StyledFormLabel>
               <TextField
                 id="outlined-read-only-input"
                 type="date"
-                label=""
+                label="D.O.I"
                 value={install}
                 variant="outlined"
                 disabled={!editInstall}
@@ -392,13 +370,9 @@ export default function Details({ id, data }) {
                   </IconButton>
                 ) : (
                   <ButtonContainer>
-                    <CreateButton
-                      variant="contained"
-                      color="primary"
-                      type="submit"
-                    >
-                      Update
-                    </CreateButton>
+                    <IconButton type="submit">
+                      <CheckCircleRoundedIcon />
+                    </IconButton>
                   </ButtonContainer>
                 )}
               </DetailAction>
@@ -441,13 +415,9 @@ export default function Details({ id, data }) {
                   </IconButton>
                 ) : (
                   <ButtonContainer>
-                    <CreateButton
-                      variant="contained"
-                      color="primary"
-                      type="submit"
-                    >
-                      Update
-                    </CreateButton>
+                    <IconButton type="submit">
+                      <CheckCircleRoundedIcon />
+                    </IconButton>
                   </ButtonContainer>
                 )}
               </DetailAction>
@@ -461,11 +431,11 @@ export default function Details({ id, data }) {
           <Form onSubmit={handleOwnerUpdate}>
             <DetailGroup>
               <StyledFormLabel>
-                <em>owner</em>
+                <em>Owner</em>
               </StyledFormLabel>
               <TextField
                 id="outlined-read-only-input"
-                label=""
+                label="Owner"
                 value={owner}
                 variant="outlined"
                 disabled={!editOwner}
@@ -486,13 +456,9 @@ export default function Details({ id, data }) {
                   </IconButton>
                 ) : (
                   <ButtonContainer>
-                    <CreateButton
-                      variant="contained"
-                      color="primary"
-                      type="submit"
-                    >
-                      Update
-                    </CreateButton>
+                    <IconButton type="submit">
+                      <CheckCircleRoundedIcon />
+                    </IconButton>
                   </ButtonContainer>
                 )}
               </DetailAction>
@@ -506,17 +472,18 @@ export default function Details({ id, data }) {
 
 const ButtonContainer = styled.div``;
 
-const CreateButton = styled(Button)``;
-
 const StyledFormLabel = styled(FormLabel)`
   font-size: 1.2rem;
   margin: 0 0.5rem;
+  @media (max-width: 375px) {
+    display: none;
+  }
 `;
 
 const Form = styled.form``;
 
 const StyledCard = styled(Card)`
-  padding: 2rem;
+  padding: 1.5rem;
 
   @media (max-width: 425px) {
     padding: 0.5rem;

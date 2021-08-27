@@ -44,7 +44,14 @@ function CreateModal() {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      margin: theme.spacing(0, 3),
+      // overflow: "scroll",
+      margin: theme.spacing(0, 2),
+      ["@media (max-width:420px)"]: {
+        // eslint-disable-line no-useless-computed-key
+        margin: "2rem 1rem 0",
+        display: "block",
+        overflow: "scroll",
+      },
     },
     grid: {
       display: "flex",
@@ -56,11 +63,20 @@ function CreateModal() {
       backgroundColor: theme.palette.background.paper,
       maxWidth: "600px",
       border: "1px solid #0101",
-      boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 2),
+      boxShadow: theme.shadows[5],
+      ["@media (max-width:420px)"]: {
+        // eslint-disable-line no-useless-computed-key
+        padding: theme.spacing(0),
+      },
     },
     formControl: {
       margin: theme.spacing(1, 1, 0),
+      ["@media (max-width:420px)"]: {
+        // eslint-disable-line no-useless-computed-key
+        margin: theme.spacing(0),
+        padding: theme.spacing(0),
+      },
     },
   }));
 

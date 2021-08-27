@@ -1,20 +1,27 @@
 import Topbar from "../../components/Topbar";
-import { db } from "../../firebase.js";
+import { auth, db } from "../../firebase.js";
+import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
 import Details from "../../components/Details";
 import { Grid } from "@material-ui/core";
-import { useRouter } from "next/router";
+import router, { useRouter } from "next/router";
 import { useCollection } from "react-firebase-hooks/firestore";
 
 export default function Inventory() {
+  const [user] = useAuthState(auth);
+  const router = useRouter();
   const { query } = useRouter();
 
   const inventoryRef = db.collection("inventories");
   const [inventorySnapshot] = useCollection(inventoryRef);
   let renderInventory = inventorySnapshot?.docs.filter(
-    (inventory) => inventory.id === query.id
+    (inventory) =>
+      inventory.id === query.id && inventory.data().userId === user.uid
   );
-  console.log(renderInventory);
+
+  if (renderInventory?.length === 0) {
+    router.push("/");
+  }
 
   return (
     <>
@@ -38,11 +45,16 @@ export default function Inventory() {
 
 const GridContainer = styled.div`
   padding: 5rem;
+  min-height: calc(100vh - 65px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   @media (max-width: 1000px) {
     padding: 1.5rem;
   }
   @media (max-width: 500px) {
     padding: 0.5rem;
+    display: block;
   }
 `;
 
