@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import CodeIcon from "@material-ui/icons/Code";
+import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import { Link } from "@material-ui/core";
 
 export default function Footer() {
@@ -13,7 +14,9 @@ export default function Footer() {
         <StyledCodeIcon />
       </Link>
       <FooterContent>
-        <h5>Made with ❤️ by Vibhu</h5>
+        <StyledFiberManualRecordIcon />
+        <h5>Made by Vibhu</h5>
+        <StyledFiberManualRecordIcon />
       </FooterContent>
       <Link href="https://github.com/Vibhukumar10" target="_blank">
         <StyledGitHubIcon />
@@ -49,8 +52,16 @@ const FooterContainer = styled.div`
 `;
 
 const FooterContent = styled.div`
-  margin: 0 20px;
+  margin: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   @media (max-width: 320px) {
-    margin: 0 10px;
+    margin: 0 6px;
   }
+`;
+
+const StyledFiberManualRecordIcon = styled(FiberManualRecordIcon)`
+  font-size: 10px !important;
+  margin: 0 4px;
 `;
