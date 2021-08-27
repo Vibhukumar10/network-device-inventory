@@ -50,4 +50,7 @@ const FooterContainer = styled.div`
 
 const FooterContent = styled.div`
   margin: 0 20px;
+  @media (max-width: 320px) {
+    margin: 0 10px;
+  }
 `;
