@@ -77,79 +77,81 @@ export default function Inventories({ id, data }) {
   };
 
   return (
-    <StyledGrid lg={3} md={4} sm={6} xs={12} style={{ padding: "1rem" }} item>
-      <StyledCard>
-        <CardActionArea onClick={enterInventory}>
-          <CardMedia
-            component="img"
-            alt="Network Device"
-            height="140"
-            image={
-              num === 10
-                ? Switch.ONE
-                : num === 20
-                ? Switch.TWO
-                : num === 30
-                ? Switch.THREE
-                : num === 40
-                ? Switch.FOUR
-                : num === 50
-                ? Switch.FIVE
-                : null
-            }
-            title="Network Device"
-            className={classes.image}
-          />
-          <Typography variant="h5" className={classes.overlay}>
-            <span
-              style={{
-                opacity: "0.8",
-                fontWeight: "lighter",
-              }}
-            >
-              {num === 10
-                ? SwitchName.ONE
-                : num === 20
-                ? SwitchName.TWO
-                : num === 30
-                ? SwitchName.THREE
-                : num === 40
-                ? SwitchName.FOUR
-                : num === 50
-                ? SwitchName.FIVE
-                : null}
-            </span>
-          </Typography>
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              {data.inventory.name}
+    <>
+      <StyledGrid lg={3} md={4} sm={6} xs={12} style={{ padding: "1rem" }} item>
+        <StyledCard>
+          <CardActionArea onClick={enterInventory}>
+            <CardMedia
+              component="img"
+              alt="Network Device"
+              height="140"
+              image={
+                num === 10
+                  ? Switch.ONE
+                  : num === 20
+                  ? Switch.TWO
+                  : num === 30
+                  ? Switch.THREE
+                  : num === 40
+                  ? Switch.FOUR
+                  : num === 50
+                  ? Switch.FIVE
+                  : null
+              }
+              title="Network Device"
+              className={classes.image}
+            />
+            <Typography variant="h5" className={classes.overlay}>
+              <span
+                style={{
+                  opacity: "0.8",
+                  fontWeight: "lighter",
+                }}
+              >
+                {num === 10
+                  ? SwitchName.ONE
+                  : num === 20
+                  ? SwitchName.TWO
+                  : num === 30
+                  ? SwitchName.THREE
+                  : num === 40
+                  ? SwitchName.FOUR
+                  : num === 50
+                  ? SwitchName.FIVE
+                  : null}
+              </span>
             </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Owner: {data.inventory.owner}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions
-          style={{ justifyContent: "space-between", alignItems: "center " }}
-        >
-          <LastUpdated date={timestamp} />
-          <IconContainer>
-            <IconButton
-              color="primary"
-              onClick={() => {
-                router.push(`/inventory/${id}`);
-              }}
-              style={{ padding: "6px" }}
-            >
-              <OpenInNewIcon />
-            </IconButton>
-            <IconButton onClick={handleDelete} color="primary">
-              <DeleteOutlineIcon />
-            </IconButton>
-          </IconContainer>
-        </CardActions>
-      </StyledCard>
-    </StyledGrid>
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+                {data.inventory.name}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                Owner: {data.inventory.owner}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+          <CardActions
+            style={{ justifyContent: "space-between", alignItems: "center " }}
+          >
+            <LastUpdated date={timestamp} />
+            <IconContainer>
+              <IconButton
+                color="primary"
+                onClick={() => {
+                  router.push(`/inventory/${id}`);
+                }}
+                style={{ padding: "6px" }}
+              >
+                <OpenInNewIcon />
+              </IconButton>
+              <IconButton onClick={handleDelete} color="primary">
+                <DeleteOutlineIcon />
+              </IconButton>
+            </IconContainer>
+          </CardActions>
+        </StyledCard>
+      </StyledGrid>
+    </>
   );
 }
 const StyledGrid = styled(Grid)`

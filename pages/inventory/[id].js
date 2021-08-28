@@ -6,6 +6,7 @@ import Details from "../../components/Details";
 import { Grid } from "@material-ui/core";
 import router, { useRouter } from "next/router";
 import { useCollection } from "react-firebase-hooks/firestore";
+import Head from "next/head";
 
 export default function Inventory() {
   const [user] = useAuthState(auth);
@@ -25,6 +26,9 @@ export default function Inventory() {
 
   return (
     <>
+      <Head>
+        <title>Network Inventory</title>
+      </Head>
       <Container>
         <Topbar />
         <GridContainer>

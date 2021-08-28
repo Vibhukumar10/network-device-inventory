@@ -1,4 +1,4 @@
-import { Card, Grid, TextField } from "@material-ui/core";
+import { Card, Fab, Grid, TextField } from "@material-ui/core";
 import styled from "styled-components";
 import { auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -7,6 +7,7 @@ import CreateModal from "./CreateModal";
 import Inventories from "./Inventories";
 import Topbar from "./Topbar";
 import { useState } from "react";
+import AddIcon from "@material-ui/icons/Add";
 
 function Dashboard() {
   const [user] = useAuthState(auth);
@@ -32,6 +33,7 @@ function Dashboard() {
       {/*  */}
       <Container>
         <Topbar />
+
         <SearchContainer>
           <Card>
             <Search>

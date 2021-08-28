@@ -83,45 +83,30 @@ export default function Details({ id, data }) {
   //location
   const handleLocationUpdate = (e) => {
     e.preventDefault();
-    if (location.length === 0) {
-      alert("This field cannot be left blank");
-      setLocation(data.location);
-    } else {
-      db.collection("inventories").doc(query.id).update({
-        timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
-        "inventory.location": location,
-      });
-    }
+    db.collection("inventories").doc(query.id).update({
+      timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
+      "inventory.location": location,
+    });
     setEditLocation(false);
   };
 
   //install
   const handleInstallUpdate = (e) => {
     e.preventDefault();
-    if (install.length === 0) {
-      alert("This field cannot be left blank");
-      setInstall(data.install);
-    } else {
-      db.collection("inventories").doc(query.id).update({
-        timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
-        "inventory.install": install,
-      });
-    }
+    db.collection("inventories").doc(query.id).update({
+      timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
+      "inventory.install": install,
+    });
     setEditInstall(false);
   };
 
   //eol
   const handleEolUpdate = (e) => {
     e.preventDefault();
-    if (eol.length === 0) {
-      alert("This field cannot be left blank");
-      setEol(data.eol);
-    } else {
-      db.collection("inventories").doc(query.id).update({
-        timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
-        "inventory.eol": eol,
-      });
-    }
+    db.collection("inventories").doc(query.id).update({
+      timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
+      "inventory.eol": eol,
+    });
     setEditEol(false);
   };
 
