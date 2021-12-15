@@ -30,10 +30,10 @@ Start the server
 
 ## Demo
 
-<img src="https://github.com/Vibhukumar10/react-quiz-app/blob/main/public/Screenshot(1).png" />
-<img src="https://github.com/Vibhukumar10/react-quiz-app/blob/main/public/Screenshot(2).png" />
-<img src="https://github.com/Vibhukumar10/react-quiz-app/blob/main/public/Screenshot(3).png" />
-<img src="https://github.com/Vibhukumar10/react-quiz-app/blob/main/public/Screenshot(4).png" />
+<img src="https://github.com/Vibhukumar10/network-device-inventory/blob/537fe388d776234924c9f7d93dc19309473ee9e5/public/Screenshot(1).PNG" />
+<img src="https://github.com/Vibhukumar10/network-device-inventory/blob/537fe388d776234924c9f7d93dc19309473ee9e5/public/Screenshot(2).PNG" />
+<img src="https://github.com/Vibhukumar10/network-device-inventory/blob/537fe388d776234924c9f7d93dc19309473ee9e5/public/Screenshot(3).PNG" />
+<img src="https://github.com/Vibhukumar10/network-device-inventory/blob/537fe388d776234924c9f7d93dc19309473ee9e5/public/Screenshot(4).PNG" />
 
 ## Deployment
 
